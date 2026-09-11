@@ -1,9 +1,8 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>M24 Audio Hub – My English Adventure</title>
 
 <style>
@@ -14,7 +13,7 @@ body {
   padding: 24px;
   line-height: 1.5;
   background: #f5f8fc;
-  color: #172033;
+  color: #172b4d;
 }
 
 h1 {
@@ -22,7 +21,7 @@ h1 {
 }
 
 .subtitle {
-  color: #5f6b7a;
+  color: #486581;
   margin-top: 0;
 }
 
@@ -32,33 +31,53 @@ h1 {
   border-radius: 14px;
   padding: 18px;
   margin: 16px 0;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
   scroll-margin-top: 20px;
 }
 
 .card:target {
-  border-width: 2px;
+  border: 2px solid #2563eb;
+  box-shadow: 0 0 0 4px rgba(37,99,235,0.10);
 }
 
-.card h2 {
+h2 {
   font-size: 1.05rem;
-  margin: 0 0 8px 0;
+  margin: 0 0 8px;
 }
 
-.card p {
-  margin: 4px 0 12px;
-  color: #5f6b7a;
+.description {
+  color: #486581;
+  margin-bottom: 12px;
 }
 
 audio {
   width: 100%;
 }
 
-.footer {
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 24px;
+}
+
+.nav a {
+  text-decoration: none;
+  background: #e8f0fe;
+  color: #174ea6;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.nav a:hover {
+  background: #d2e3fc;
+}
+
+footer {
+  margin-top: 30px;
+  color: #6b7280;
+  font-size: 0.9rem;
   text-align: center;
-  color: #7a8494;
-  font-size: 0.85rem;
-  margin-top: 28px;
 }
 </style>
 </head>
@@ -68,57 +87,90 @@ audio {
 <h1>🎧 M24 Audio Hub</h1>
 <p class="subtitle">My English Adventure · Grade 4–5</p>
 
-<div class="card" id="A01">
+<nav class="nav">
+  <a href="#A01">A01</a>
+  <a href="#A02">A02</a>
+  <a href="#A03">A03</a>
+  <a href="#A04">A04</a>
+  <a href="#A05">A05</a>
+  <a href="#A06">A06</a>
+</nav>
+
+<section class="card" id="A01">
   <h2>M24-A01 — My Introduction</h2>
-  <p>Listen and learn how to introduce yourself.</p>
+  <p class="description">
+    Listen and learn how to introduce yourself.
+  </p>
+
   <audio controls preload="metadata">
     <source src="audio/M24-A01_My-Introduction.mp3" type="audio/mpeg">
+    Your browser does not support audio.
   </audio>
-</div>
+</section>
 
-<div class="card" id="A02">
+<section class="card" id="A02">
   <h2>M24-A02 — My World</h2>
-  <p>Listen and talk about your world.</p>
+  <p class="description">
+    Listen and talk about your world.
+  </p>
+
   <audio controls preload="metadata">
     <source src="audio/M24-A02_My-World.mp3" type="audio/mpeg">
+    Your browser does not support audio.
   </audio>
-</div>
+</section>
 
-<div class="card" id="A03">
+<section class="card" id="A03">
   <h2>M24-A03 — My Day</h2>
-  <p>Listen and talk about your daily activities.</p>
+  <p class="description">
+    Listen and talk about your daily activities.
+  </p>
+
   <audio controls preload="metadata">
     <source src="audio/M24-A03_My-Day.mp3" type="audio/mpeg">
+    Your browser does not support audio.
   </audio>
-</div>
+</section>
 
-<div class="card" id="A04">
+<section class="card" id="A04">
   <h2>M24-A04 — Weather Talk</h2>
-  <p>Listen and talk about the weather.</p>
+  <p class="description">
+    Listen and talk about the weather.
+  </p>
+
   <audio controls preload="metadata">
     <source src="audio/M24-A04_Weather-Talk.mp3" type="audio/mpeg">
+    Your browser does not support audio.
   </audio>
-</div>
+</section>
 
-<div class="card" id="A05">
+<section class="card" id="A05">
   <h2>M24-A05 — Travel Talk</h2>
-  <p>Listen and talk about travelling.</p>
+  <p class="description">
+    Listen and talk about travel.
+  </p>
+
   <audio controls preload="metadata">
     <source src="audio/M24-A05_Travel-Talk.mp3" type="audio/mpeg">
+    Your browser does not support audio.
   </audio>
-</div>
+</section>
 
-<div class="card" id="A06">
+<section class="card" id="A06">
   <h2>M24-A06 — My English Adventure</h2>
-  <p>Listen to the final English adventure.</p>
+  <p class="description">
+    Listen and enjoy your English adventure.
+  </p>
+
   <audio controls preload="metadata">
     <source src="audio/M24-A06_My-English-Adventure.mp3" type="audio/mpeg">
+    Your browser does not support audio.
   </audio>
-</div>
+</section>
 
-<div class="footer">
-  M24 My English Adventure · Audio Hub
-</div>
+<footer>
+  M24 Audio Hub · My English Adventure
+</footer>
 
 </body>
 </html>
