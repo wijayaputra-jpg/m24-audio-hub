@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Part 4 Set C — Challenge</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f8fc;font-family:Arial,sans-serif;color:#17324d}
+.wrap{max-width:820px;margin:0 auto;padding:18px}
+.card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 3px 14px rgba(0,0,0,.10)}
+h1{margin:0 0 8px;color:#075f91;font-size:30px}
+.badge{display:inline-block;background:#e8f3fb;border-radius:20px;padding:7px 12px;font-weight:bold;color:#28617f}
+.progress{font-weight:bold;margin:18px 0 8px}
+.talk-title{font-size:19px;font-weight:bold;margin:10px 0}
+audio{width:100%;margin:8px 0 18px}
+.question{border:1px solid #d9e3ea;border-radius:12px;padding:15px;margin:14px 0}
+.question p{font-weight:bold;line-height:1.45}
+.option{display:block;border:1px solid #d9e3ea;border-radius:9px;padding:11px;margin:8px 0;cursor:pointer}
+.option:hover{background:#f5f9fc}
+.option input{margin-right:8px}
+.actions{margin-top:14px}
+button{border:0;border-radius:9px;padding:11px 18px;font-weight:bold;cursor:pointer}
+#next{background:#075f91;color:white}
+#repeat{background:#e9eef2;color:#17324d;margin-left:6px}
+#next:disabled{opacity:.45;cursor:not-allowed}
+.note{color:#607080;font-size:14px}
+#feedback{font-weight:bold;min-height:22px;margin:10px 0}
+.result{text-align:center;padding:25px}
+.score{font-size:28px;font-weight:bold;color:#075f91}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h1>Part 4 — Talks</h1>
+<div class="badge">SET C • CHALLENGE • 10 QUESTIONS</div>
+<p class="note">Listen carefully. Each talk has two questions.</p>
+
+<div id="quiz">
+  <div class="progress" id="progress"></div>
+  <div id="content"></div>
+  <div id="feedback"></div>
+  <div class="actions">
+    <button id="next" type="button" disabled>Next →</button>
+    <button id="repeat" type="button">↻ Ulangi Talk</button>
+  </div>
+</div>
+
+<div id="result" class="result hidden"></div>
+</div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+var BASE="https://wijayaputra-jpg.github.io/m24-audio-hub/audio/part4-set-c/";
+var talks=[
+{file:"P4C01.mp3",qs:[
+{q:"Why is the announcement being made?",a:["A. To announce a change in a staff briefing schedule.","B. To introduce a new human resources employee.","C. To cancel a quarterly meeting.","D. To announce a new meeting location."],c:0},
+{q:"What are department supervisors asked to do?",a:["A. Prepare the presentation.","B. Inform staff about the revised schedule.","C. Move the meeting to another room.","D. Contact the human resources department."],c:1}]},
+{file:"P4C02.mp3",qs:[
+{q:"Why will the east parking area be unavailable?",a:["A. It is being expanded.","B. It is being cleaned.","C. Its parking spaces are being repainted.","D. It is being used for an event."],c:2},
+{q:"What are visitors advised to do?",a:["A. Arrive before the contractors.","B. Park near the main entrance.","C. Use public transportation.","D. Allow extra time to walk to the entrance."],c:3}]},
+{file:"P4C03.mp3",qs:[
+{q:"Why has boarding been delayed?",a:["A. The aircraft has not arrived.","B. A safety inspection is in progress.","C. The gate has been changed.","D. The flight has been canceled."],c:1},
+{q:"What can passengers requiring assistance do?",a:["A. Leave the airport.","B. Wait at another gate.","C. Speak with an airline representative.","D. Call the transportation office."],c:2}]},
+{file:"P4C04.mp3",qs:[
+{q:"What is the purpose of the new inventory procedure?",a:["A. To reduce the number of employees.","B. To speed up production.","C. To improve inventory record accuracy.","D. To replace the warehouse training program."],c:2},
+{q:"Who is required to attend the training?",a:["A. All warehouse employees.","B. Production supervisors only.","C. New employees only.","D. Inventory managers only."],c:0}]},
+{file:"P4C05.mp3",qs:[
+{q:"Why may some deliveries arrive late?",a:["A. The company website is unavailable.","B. Customer service is closed.","C. Transportation has been affected by heavy rain.","D. The orders were placed too late."],c:2},
+{q:"What should customers do if an order has not arrived by tomorrow afternoon?",a:["A. Place a new order.","B. Visit the delivery company.","C. Check the weather forecast.","D. Contact customer service."],c:3}]}
+];
+
+var index=0,score=0,answered=false;
+var progress=document.getElementById("progress");
+var content=document.getElementById("content");
+var feedback=document.getElementById("feedback");
+var next=document.getElementById("next");
+var repeat=document.getElementById("repeat");
+var quiz=document.getElementById("quiz");
+var result=document.getElementById("result");
+
+function render(){
+  answered=false;
+  next.disabled=true;
+  feedback.textContent="";
+  var t=talks[index];
+  progress.textContent="Talk "+(index+1)+" / "+talks.length+" • Questions "+(index*2+1)+"–"+(index*2+2);
+
+  var s='<div class="talk-title">'+t.file.replace(".mp3","")+" — Challenge</div>";
+  s+='<audio controls preload="metadata" src="'+BASE+t.file+'"></audio>';
+
+  for(var q=0;q<2;q++){
+    s+='<div class="question"><p>Question '+(index*2+q+1)+': '+t.qs[q].q+'</p>';
+    for(var a=0;a<4;a++){
+      s+='<label class="option"><input type="radio" name="q'+q+'" value="'+a+'"> '+t.qs[q].a[a]+'</label>';
+    }
+    s+='</div>';
+  }
+  content.innerHTML=s;
+}
+
+function evaluate(){
+  if(answered)return;
+  var selected=[];
+  for(var q=0;q<2;q++){
+    var el=document.querySelector('input[name="q'+q+'"]:checked');
+    if(!el){
+      feedback.textContent="Silakan jawab kedua soal terlebih dahulu.";
+      return;
+    }
+    selected.push(Number(el.value));
+  }
+
+  for(var q=0;q<2;q++){
+    if(selected[q]===talks[index].qs[q].c)score++;
+  }
+
+  answered=true;
+  next.disabled=false;
+  feedback.textContent="Jawaban tersimpan. Klik Next untuk melanjutkan.";
+
+  var inputs=document.querySelectorAll("#content input");
+  for(var i=0;i<inputs.length;i++)inputs[i].disabled=true;
+}
+
+content.addEventListener("change",evaluate);
+
+next.addEventListener("click",function(){
+  if(!answered)return;
+  index++;
+  if(index<talks.length){
+    render();
+    window.scrollTo(0,0);
+  }else{
+    quiz.className="hidden";
+    var pct=score*10;
+    result.className="result";
+    result.innerHTML='<h2>Part 4 Set C — Complete</h2>'+
+      '<div class="score">'+score+' / 10 ('+pct+'%)</div>'+
+      '<p>'+(pct>=80?"🎉 Mastery target achieved!":"Keep practicing and repeat this set.")+'</p>'+
+      '<button id="restart" type="button">↻ Ulangi Set C</button>';
+    document.getElementById("restart").onclick=function(){location.reload()};
+    window.scrollTo(0,0);
+  }
+});
+
+repeat.onclick=function(){
+  var audio=content.querySelector("audio");
+  if(audio){audio.currentTime=0;audio.play().catch(function(){});}
+};
+
+render();
+})();
+</script>
+</body>
+</html>
