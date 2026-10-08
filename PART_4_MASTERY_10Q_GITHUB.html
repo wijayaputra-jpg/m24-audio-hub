@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Part 4 — Mastery Test</title>
+<style>
+*{box-sizing:border-box} body{margin:0;background:#f4f8fc;font-family:Arial,sans-serif;color:#17324d}
+.wrap{max-width:820px;margin:auto;padding:18px} .card{background:#fff;border-radius:22px;padding:22px;box-shadow:0 3px 14px rgba(0,0,0,.10)}
+h1{margin:0 0 8px;color:#075f91;font-size:30px} .badge{display:inline-block;background:#e8f3fb;border-radius:20px;padding:7px 12px;font-weight:bold;color:#28617f}
+.progress{margin:18px 0 8px} .talk-title{font-size:19px;font-weight:bold;margin:10px 0} audio{width:100%;margin:10px 0 18px}
+.q{border:1px solid #dfe7ee;border-radius:14px;padding:14px;margin:12px 0} .q strong{display:block;margin-bottom:9px}
+label{display:block;border:1px solid #dfe7ee;border-radius:10px;padding:10px;margin:7px 0;cursor:pointer}
+button{border:0;border-radius:10px;padding:11px 16px;font-weight:bold;cursor:pointer;background:#0879b5;color:white}
+button.secondary{background:#e8eef3;color:#28485f;margin-left:8px}
+#result{display:none;text-align:center} .score{font-size:38px;font-weight:bold;color:#075f91;margin:15px}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+<div id="app"></div><div id="result"></div>
+</div></div>
+<script>
+const BASE="https://wijayaputra-jpg.github.io/m24-audio-hub/audio/part4-mastery/";
+const DATA=[{"id": "P4M01", "title": "Staff Briefing", "text": "Good morning, department supervisors. This is a reminder that the weekly staff briefing has been moved from Tuesday morning to Wednesday afternoon. The change is necessary because the training room will be used for equipment maintenance on Tuesday. Please inform your team members about the revised schedule. The briefing will still begin at two o'clock and will be held in Conference Room B.", "questions": [{"q": "What are supervisors asked to do?", "correct": "B", "options": ["Prepare a presentation.", "Inform their team members about the change.", "Move the briefing to another room.", "Contact the maintenance team."]}, {"q": "What are supervisors asked to do?", "correct": "B", "options": ["Prepare a presentation.", "Inform their team members about the change.", "Move the briefing to another room.", "Contact the maintenance team."]}, {"q": "What are supervisors asked to do?", "correct": "B", "options": ["Prepare a presentation.", "Inform their team members about the change.", "Move the briefing to another room.", "Contact the maintenance team."]}, {"q": "What are supervisors asked to do?", "correct": "B", "options": ["Prepare a presentation.", "Inform their team members about the change.", "Move the briefing to another room.", "Contact the maintenance team."]}, {"q": "What are supervisors asked to do?", "correct": "B", "options": ["Prepare a presentation.", "Inform their team members about the change.", "Move the briefing to another room.", "Contact the maintenance team."]}]}, {"id": "P4M02", "title": "Shipping Update", "text": "Attention, warehouse staff. The shipment of replacement parts originally scheduled for this morning has been delayed because of heavy traffic near the distribution center. The carrier now expects to arrive at approximately three p.m. Please keep the receiving area clear and make sure that the inventory team is available when the shipment arrives. If there are further delays, we will provide an update through the warehouse messaging system.", "questions": [{"q": "What should staff do before the shipment arrives?", "correct": "D", "options": ["Close the warehouse entrance.", "Send the shipment back.", "Call the distribution center.", "Keep the receiving area clear."]}, {"q": "What should staff do before the shipment arrives?", "correct": "D", "options": ["Close the warehouse entrance.", "Send the shipment back.", "Call the distribution center.", "Keep the receiving area clear."]}, {"q": "What should staff do before the shipment arrives?", "correct": "D", "options": ["Close the warehouse entrance.", "Send the shipment back.", "Call the distribution center.", "Keep the receiving area clear."]}, {"q": "What should staff do before the shipment arrives?", "correct": "D", "options": ["Close the warehouse entrance.", "Send the shipment back.", "Call the distribution center.", "Keep the receiving area clear."]}, {"q": "What should staff do before the shipment arrives?", "correct": "D", "options": ["Close the warehouse entrance.", "Send the shipment back.", "Call the distribution center.", "Keep the receiving area clear."]}]}, {"id": "P4M03", "title": "Hotel Announcement", "text": "Good evening, guests. We would like to inform you that the hotel's fitness center will be closed tomorrow morning for routine equipment inspection. Guests may use the swimming pool as usual, and complimentary exercise mats will be available in the garden area. The fitness center is expected to reopen at noon. We apologize for any inconvenience and thank you for your understanding.", "questions": [{"q": "When is the fitness center expected to reopen?", "correct": "A", "options": ["At ten o'clock.", "Tomorrow evening.", "After the inspection.", "At noon."]}, {"q": "When is the fitness center expected to reopen?", "correct": "A", "options": ["At ten o'clock.", "Tomorrow evening.", "After the inspection.", "At noon."]}, {"q": "When is the fitness center expected to reopen?", "correct": "A", "options": ["At ten o'clock.", "Tomorrow evening.", "After the inspection.", "At noon."]}, {"q": "When is the fitness center expected to reopen?", "correct": "A", "options": ["At ten o'clock.", "Tomorrow evening.", "After the inspection.", "At noon."]}, {"q": "When is the fitness center expected to reopen?", "correct": "A", "options": ["At ten o'clock.", "Tomorrow evening.", "After the inspection.", "At noon."]}]}, {"id": "P4M04", "title": "Product Presentation", "text": "Welcome to today's product presentation. Before we begin, please note that printed copies of the product specifications are available at the registration desk. During the presentation, our engineering manager will demonstrate the new control system and explain several of its safety features. After the demonstration, there will be a short question-and-answer session. If you have technical questions, please write them on the cards provided at your seat.", "questions": [{"q": "What should attendees do if they have technical questions?", "correct": "D", "options": ["Ask the engineering manager directly.", "Leave before the presentation ends.", "Collect a second copy of the specifications.", "Write them on cards at their seats."]}, {"q": "What should attendees do if they have technical questions?", "correct": "D", "options": ["Ask the engineering manager directly.", "Leave before the presentation ends.", "Collect a second copy of the specifications.", "Write them on cards at their seats."]}, {"q": "What should attendees do if they have technical questions?", "correct": "D", "options": ["Ask the engineering manager directly.", "Leave before the presentation ends.", "Collect a second copy of the specifications.", "Write them on cards at their seats."]}, {"q": "What should attendees do if they have technical questions?", "correct": "D", "options": ["Ask the engineering manager directly.", "Leave before the presentation ends.", "Collect a second copy of the specifications.", "Write them on cards at their seats."]}, {"q": "What should attendees do if they have technical questions?", "correct": "D", "options": ["Ask the engineering manager directly.", "Leave before the presentation ends.", "Collect a second copy of the specifications.", "Write them on cards at their seats."]}]}, {"id": "P4M05", "title": "Office Relocation", "text": "This is an announcement for all employees. Beginning next month, the customer service department will move to the second floor while renovation work is completed on the first floor. Employees in customer service should pack personal belongings by Friday. New desk assignments will be posted on the department notice board next week. The department's telephone numbers and email addresses will remain unchanged during the relocation.", "questions": [{"q": "What will remain unchanged?", "correct": "B", "options": ["The desk assignments.", "The department's contact information.", "The relocation date.", "The first-floor renovation."]}, {"q": "What will remain unchanged?", "correct": "B", "options": ["The desk assignments.", "The department's contact information.", "The relocation date.", "The first-floor renovation."]}, {"q": "What will remain unchanged?", "correct": "B", "options": ["The desk assignments.", "The department's contact information.", "The relocation date.", "The first-floor renovation."]}, {"q": "What will remain unchanged?", "correct": "B", "options": ["The desk assignments.", "The department's contact information.", "The relocation date.", "The first-floor renovation."]}, {"q": "What will remain unchanged?", "correct": "B", "options": ["The desk assignments.", "The department's contact information.", "The relocation date.", "The first-floor renovation."]}]}];
+let idx=0, answers={}, score=0;
+const app=document.getElementById("app"), result=document.getElementById("result");
+function render(){
+ const t=DATA[idx];
+ let h=`<h1>Part 4 — Talks</h1><span class="badge">MASTERY TEST • 10 QUESTIONS</span>
+ <p>Listen carefully. Each talk has two questions. Target mastery: 80%.</p>
+ <div class="progress">Talk ${idx+1} / 5 • Questions ${idx*2+1}–${idx*2+2}</div>
+ <div class="talk-title">${t.id} — Mastery</div>
+ <audio controls preload="metadata" src="${BASE+t.id}.mp3"></audio>`;
+ t.questions.forEach((q,qi)=>{
+   const key=idx+"-"+qi;
+   h+=`<div class="q"><strong>Question ${idx*2+qi+1}: ${q.q}</strong>`;
+   q.options.forEach((o,i)=>{
+     const letter=String.fromCharCode(65+i);
+     h+=`<label><input type="radio" name="q${key}" value="${letter}" ${answers[key]===letter?"checked":""}> ${letter}. ${o}</label>`;
+   });
+   h+=`</div>`;
+ });
+ h+=`<p id="status"></p><button onclick="next()"> ${idx<4?"Next →":"Finish Test"} </button>
+ <button class="secondary" onclick="repeatTalk()">↻ Ulangi Talk</button>`;
+ app.innerHTML=h;
+ document.querySelectorAll('input[type=radio]').forEach(x=>x.addEventListener('change',()=>{answers[x.name.substring(1)]=x.value; updateStatus();}));
+ updateStatus();
+}
+function updateStatus(){
+ const a0=answers[idx+"-0"], a1=answers[idx+"-1"];
+ document.getElementById("status").textContent=(a0&&a1)?"Jawaban tersimpan. Klik Next untuk melanjutkan.":"Jawab kedua pertanyaan terlebih dahulu.";
+}
+function next(){
+ if(!answers[idx+"-0"]||!answers[idx+"-1"]){alert("Silakan jawab kedua pertanyaan terlebih dahulu.");return;}
+ if(idx<4){idx++;render();} else finish();
+}
+function repeatTalk(){const a=document.querySelector("audio");a.currentTime=0;a.play();}
+function finish(){
+ score=0; DATA.forEach((t,i)=>t.questions.forEach((q,j)=>{if(answers[i+"-"+j]===q.correct)score++;}));
+ const pct=score*10, pass=pct>=80;
+ app.style.display="none"; result.style.display="block";
+ result.innerHTML=`<h1>Part 4 — Mastery Test</h1><div class="score">${score} / 10</div><p>${pct}% — ${pass?"MASTERY ACHIEVED ✅":"KEEP PRACTICING 🔁"}</p><p>Target mastery: 80%</p><button onclick="location.reload()">↻ Ulangi Mastery Test</button>`;
+}
+render();
+</script>
+</body></html>
