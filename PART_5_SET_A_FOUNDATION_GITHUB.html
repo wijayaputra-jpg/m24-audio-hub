@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Part 5 — Incomplete Sentences | Set A Foundation</title>
+<style>
+*{box-sizing:border-box} body{margin:0;background:#f4f8fc;font-family:Arial,sans-serif;color:#17324d}
+.wrap{max-width:820px;margin:auto;padding:18px}.card{background:#fff;border-radius:22px;padding:22px;box-shadow:0 3px 14px rgba(0,0,0,.10)}
+h1{margin:0 0 8px;color:#075f91;font-size:30px}.badge{display:inline-block;background:#e8f3fb;border-radius:20px;padding:7px 12px;font-weight:bold;color:#28617f}
+.progress{margin:18px 0 8px;font-weight:bold}.instruction{color:#536b7d}
+.q{border:1px solid #dfe7ee;border-radius:14px;padding:16px;margin:16px 0}.q strong{display:block;margin-bottom:12px;font-size:17px}
+label{display:block;border:1px solid #dfe7ee;border-radius:10px;padding:11px;margin:8px 0;cursor:pointer}label:hover{background:#f5faff}
+button{border:0;border-radius:10px;padding:11px 17px;font-weight:bold;cursor:pointer;background:#0879b5;color:white}
+button.secondary{background:#e8eef3;color:#28485f;margin-left:8px}.status{margin:12px 0;font-weight:bold}
+#result{display:none;text-align:center}.score{font-size:42px;font-weight:bold;color:#075f91;margin:15px}
+.focus{font-size:13px;color:#65798a;margin-top:8px}
+</style>
+</head>
+<body><div class="wrap"><div class="card"><div id="app"></div><div id="result"></div></div></div>
+<script>
+const DATA=[{"q": "The warehouse supervisor _____ the inventory report every Friday.", "options": ["check", "checks", "checking", "checked"], "correct": "B", "focus": "Subject–verb agreement"}, {"q": "Please submit the completed form _____ Friday afternoon.", "options": ["at", "in", "by", "on"], "correct": "C", "focus": "Preposition of deadline"}, {"q": "The new safety equipment is _____ than the old equipment.", "options": ["more reliable", "most reliable", "reliably", "reliability"], "correct": "A", "focus": "Comparative adjective"}, {"q": "All employees must _____ their identification cards when entering the building.", "options": ["show", "shows", "showing", "shown"], "correct": "A", "focus": "Modal + base verb"}, {"q": "The meeting was canceled _____ the manager was unavailable.", "options": ["because", "although", "during", "while"], "correct": "A", "focus": "Conjunction"}, {"q": "Ms. Rina has worked in the purchasing department _____ 2022.", "options": ["for", "since", "during", "from"], "correct": "B", "focus": "Since + starting point"}, {"q": "The technician _____ the machine before the production line started.", "options": ["inspect", "inspects", "had inspected", "inspecting"], "correct": "C", "focus": "Past perfect"}, {"q": "Please read the instructions _____ before operating the equipment.", "options": ["careful", "carefully", "carefulness", "more careful"], "correct": "B", "focus": "Adverb"}, {"q": "The company plans _____ a new training program next month.", "options": ["launch", "launched", "to launch", "launching"], "correct": "C", "focus": "Plan + to-infinitive"}, {"q": "The delivery arrived late, _____ the driver had left the warehouse on time.", "options": ["so", "because", "even though", "therefore"], "correct": "C", "focus": "Contrast conjunction"}];
+let idx=0,answers={},score=0;
+const app=document.getElementById("app"),result=document.getElementById("result");
+function render(){
+ const item=DATA[idx];
+ let h=`<h1>Part 5 — Incomplete Sentences</h1>
+ <span class="badge">SET A • FOUNDATION • 10 QUESTIONS</span>
+ <p class="instruction">Choose the best answer to complete each sentence. Focus on grammar, word form, and sentence meaning.</p>
+ <div class="progress">Question ${idx+1} / 10</div>
+ <div class="q"><strong>${idx+1}. ${item.q}</strong>`;
+ item.options.forEach((o,i)=>{
+   const letter=String.fromCharCode(65+i);
+   h+=`<label><input type="radio" name="q${idx}" value="${letter}" ${answers[idx]===letter?"checked":""}> ${letter}. ${o}</label>`;
+ });
+ h+=`</div><div class="focus">Skill focus: ${item.focus}</div>
+ <div id="status" class="status"></div>
+ <button onclick="next()">${idx<9?"Next →":"Finish Test"}</button>
+ <button class="secondary" onclick="clearAnswer()">Clear Answer</button>`;
+ app.innerHTML=h;
+ document.querySelectorAll('input[type="radio"]').forEach(x=>x.addEventListener("change",()=>{answers[idx]=x.value;updateStatus()}));
+ updateStatus();
+}
+function updateStatus(){document.getElementById("status").textContent=answers[idx]?"Jawaban tersimpan.":"Pilih satu jawaban."}
+function clearAnswer(){delete answers[idx];render()}
+function next(){
+ if(!answers[idx]){alert("Silakan pilih satu jawaban terlebih dahulu.");return}
+ if(idx<9){idx++;render();window.scrollTo({top:0,behavior:"smooth"})}else finish()
+}
+function finish(){
+ score=0;DATA.forEach((item,i)=>{if(answers[i]===item.correct)score++});
+ const pct=score*10,pass=pct>=80;
+ app.style.display="none";result.style.display="block";
+ result.innerHTML=`<h1>Part 5 — Set A Foundation</h1><div class="score">${score} / 10</div>
+ <p>${pct}% — ${pass?"FOUNDATION MASTERED ✅":"KEEP PRACTICING 🔁"}</p><p>Target: 80%</p>
+ <button onclick="location.reload()">↻ Ulangi Set A</button>`;
+}
+render();
+</script></body></html>
